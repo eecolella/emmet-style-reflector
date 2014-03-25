@@ -56,9 +56,6 @@ def generateTree(str):
 			counterDebug+=1
 			print("DEBUG generate-tree ## str %s: %s" % (counterDebug, str))
 
-		# operator = str[:1]
-		# str = str[1:]
-
 		operator = str[:1]
 		if operator != ')':
 			str = str[1:]
@@ -69,8 +66,6 @@ def generateTree(str):
 
 		startGroup = str[:1]
 		if startGroup == '(':
-			# group = re.search('(?<=\()([\w|\>]*)(?=\))',str).group(0)
-			# print('group: ', group)
 			storePointerFlag = True
 			str = str[1:]
 
@@ -87,13 +82,12 @@ def generateTree(str):
 			groupMemory.append(pointer)
 			storePointerFlag = False
 
-
 	if debug:
 		print("DEBUG generate-tree ## str final: %s" % str)
 
 	return tree
 
-class EmmetStyleMirror(sublime_plugin.EventListener):
+class EmmetStyleReflector(sublime_plugin.EventListener):
 	def on_text_command(self, view, command_name, args):
 		debug = True
 		if(command_name=='expand_abbreviation_by_tab'):
@@ -109,7 +103,7 @@ class EmmetStyleMirror(sublime_plugin.EventListener):
 
 			tree = generateTree(lineStr)
 
-			sublime.status_message('#Emmet Reflector# Corresponding style saved in clipboard')
+			sublime.status_message('# Emmet Style Reflector # Corresponding style saved in clipboard')
 			sublime.set_clipboard(tree.toString())
 
 
