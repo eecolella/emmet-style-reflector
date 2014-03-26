@@ -14,7 +14,7 @@ Reflect Emmet HTML expansion in Sass/LESS
 
 ## Expansions tested
 
-* Child: div>ul>li
+* Child: ```html div>ul>li ```
 
 ```sass
 div {
@@ -30,7 +30,7 @@ div {
 }
 ```
 
-* Sibling: div+p+bq
+* Sibling: ```html div+p+bq ```
 
 ```sass
 div {
@@ -46,7 +46,7 @@ bq {
 }
 ```
 
-* Climb-up: div+div>p>span+em^blockquote
+* Climb-up: ```html div+div>p>span+em^blockquote ```
 
 ```sass
 div {
@@ -74,7 +74,7 @@ div {
 }
 ```
 
-* Grouping: div>(header>ul>li*2>a)+footer>p
+* Grouping: ```html div>(header>ul>li*2>a)+footer>p ```
 
 ```sass
 div {
@@ -106,7 +106,7 @@ div {
 }
 ```
 
-* Video demo: header>(ul#menu>li*5>a)^div#home>div.rensponsive960>div.box>div.title+div.body
+* Video demo: ```html header>(ul#menu>li*5>a)^div#home>div.rensponsive960>div.box>div.title+div.body ``` 
 
 ```sass
 header {
@@ -146,7 +146,7 @@ header {
 }
 ```
 
-* Extreme: div>(header[title="Hello world!"]>ul#menu>li.menuItem$@-*5>a)+footer{bla bla bla}^script
+* Extreme: ```html div>(header[title="Hello world!"]>ul#menu>li.menuItem$@-*5>a)+footer{bla bla bla}^script ``` 
 
 
 ```sass
