@@ -30,7 +30,7 @@ class Node(dict):
 		for child in self.childrens:
 			childrens += '\n%s\n' % (child.toString())		
 		
-		if self.selector==None:
+		if self.selector==None or self.selector == '':
 			return childrens
 		else:
 			return '%s%s {\n%s\n%s}' % (self.indentation, self.selector, childrens, self.indentation)
@@ -56,6 +56,9 @@ def generateTree(str):
 			counterDebug+=1
 			print("DEBUG generate-tree ## str %s: %s" % (counterDebug, str))
 
+		# operator = str[:1]
+		# str = str[1:]
+
 		operator = str[:1]
 		if operator != ')':
 			str = str[1:]
@@ -66,6 +69,8 @@ def generateTree(str):
 
 		startGroup = str[:1]
 		if startGroup == '(':
+			# group = re.search('(?<=\()([\w|\>]*)(?=\))',str).group(0)
+			# print('group: ', group)
 			storePointerFlag = True
 			str = str[1:]
 
@@ -82,12 +87,13 @@ def generateTree(str):
 			groupMemory.append(pointer)
 			storePointerFlag = False
 
+
 	if debug:
 		print("DEBUG generate-tree ## str final: %s" % str)
 
 	return tree
 
-class EmmetStyleReflector(sublime_plugin.EventListener):
+class EmmetStyleMirror(sublime_plugin.EventListener):
 	def on_text_command(self, view, command_name, args):
 		debug = True
 		if(command_name=='expand_abbreviation_by_tab'):
@@ -102,9 +108,11 @@ class EmmetStyleReflector(sublime_plugin.EventListener):
 			lineStr = re.sub("\w*(?=[#,\.])|[\$\@\-\*]([|0-9]*)|\[(.*?)\]|\{(.*?)\}",'', lineStr)
 
 			tree = generateTree(lineStr)
+			result = tree.toString()
+			result = re.sub("\n\n\n","\n", result)
 
-			sublime.status_message('# Emmet Style Reflector # Corresponding style saved in clipboard')
-			sublime.set_clipboard(tree.toString())
+			sublime.status_message('#Emmet Reflector# Corresponding style saved in clipboard')
+			sublime.set_clipboard(result)
 
 
 
