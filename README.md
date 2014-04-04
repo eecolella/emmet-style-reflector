@@ -8,7 +8,7 @@ Obviously, [Emmet] (https://github.com/sergeche/emmet-sublime)
 
 Reflect Emmet HTML expansion in Sass/LESS
 
-## How to use
+## How to use 
 
 [![Alt text for your video](https://raw.githubusercontent.com/eecolella/emmet-style-reflector/master/YouTubeImage.jpg)](http://www.youtube.com/watch?v=38fPtsf_Lew)
 
