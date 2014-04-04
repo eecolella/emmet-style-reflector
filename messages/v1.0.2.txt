@@ -1,0 +1,8 @@
+Emmet Style Reflector Updated to v1.0.2
+
+v1.0.2 Changelog:
+_tag without class and id will have ">"
+
+If you have any questions, comments, or run into issues, please let me know! Hope you enjoy the plugin.
+
+Thank you!
