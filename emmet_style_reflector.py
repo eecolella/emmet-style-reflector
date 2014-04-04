@@ -8,7 +8,9 @@ import urllib, urllib.parse, time, re, webbrowser, os
 class Node(dict):
 	def __init__(self,s,p=None,i=''):
 		self._parent=p
-		self.selector=s
+		self.selector='>' + s if (s!=None and # exclude root
+									re.search('\.|\#|header|footer|script|style|link|meta|body|html',s)==None and # exclude ID, Class, header, etc
+									len(s)>0) else s 
 		self.childrens=[]
 		self.indentation=i
 
@@ -93,17 +95,18 @@ def generateTree(str):
 
 	return tree
 
-class EmmetStyleMirror(sublime_plugin.EventListener):
+class EmmetStyleReflector(sublime_plugin.EventListener):
 	def on_text_command(self, view, command_name, args):
 		debug = True
 		if(command_name=='expand_abbreviation_by_tab'):
 
 			if debug:
-				print("\nDEBUG START emmet_style_mirror")
+				print("\nDEBUG START emmet_style_reflector")
 
 			line = view.lines(sublime.Region(view.sel()[0].begin(), view.sel()[0].begin()))[0]
 			lineStr = view.substr(line).strip()
 
+			sublime.status_message('#Emmet Style Reflector# Corresponding style of "%s" saved in clipboard (Ctrl/Super+V for paste)' % lineStr)
 			# remove tag if there are class or id | delete element Multiplication | delete parameters | delete text
 			lineStr = re.sub("\w*(?=[#,\.])|[\$\@\-\*]([|0-9]*)|\[(.*?)\]|\{(.*?)\}",'', lineStr)
 
@@ -111,7 +114,6 @@ class EmmetStyleMirror(sublime_plugin.EventListener):
 			result = tree.toString()
 			result = re.sub("\n\n\n","\n", result)
 
-			sublime.status_message('#Emmet Reflector# Corresponding style saved in clipboard')
 			sublime.set_clipboard(result)
 
 
