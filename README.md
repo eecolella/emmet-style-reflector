@@ -12,80 +12,85 @@ Reflect Emmet HTML expansion in Sass/LESS
 
 [![Alt text for your video](https://raw.githubusercontent.com/eecolella/emmet-style-reflector/master/YouTubeImage.jpg)](http://www.youtube.com/watch?v=38fPtsf_Lew)
 
+
+## Changelogs
+#### v1.0.2
+* tag without class and id will have ">"
+
 ## Expansions tested
 
-* Child: ``` div>ul>li ```
+* Child: ``` #first>ul>li ```
 
 ```sass
-div {
+#first {
 
-  ul {
+    >ul {
 
-    li {
-
-    }
-
-  }
-
-}
-```
-
-* Sibling: ``` div+p+bq ```
-
-```sass
-div {
-
-}
-
-p {
-
-}
-
-bq {
-
-}
-```
-
-* Climb-up: ``` div+div>p>span+em^blockquote ```
-
-```sass
-div {
-
-}
-
-div {
-
-    p {
-
-        span {
-
-        }
-
-        em {
+        >li {
 
         }
 
     }
 
-    blockquote {
+}
+```
+
+* Sibling: ``` div+p+blockquote ```
+
+```sass
+>div {
+
+}
+
+>p {
+
+}
+
+>blockquote {
+
+}
+```
+
+* Climb-up: ``` #first+#second>p>span+em^blockquote ```
+
+```sass
+#first {
+
+}
+
+#second {
+
+    >p {
+
+        >span {
+
+        }
+
+        >em {
+
+        }
+
+    }
+
+    >blockquote {
 
     }
 
 }
 ```
 
-* Grouping: ``` div>(header>ul>li*2>a)+footer>p ```
+* Grouping: ``` #first>(header>ul>li*2>a)+footer>p ```
 
 ```sass
-div {
+#first {
 
     header {
 
-        ul {
+        >ul {
 
-            li {
+            >li {
 
-                a {
+                >a {
 
                 }
 
@@ -97,7 +102,7 @@ div {
 
     footer {
 
-        p {
+        >p {
 
         }
 
@@ -111,46 +116,46 @@ div {
 ```sass
 header {
 
-  #menu {
+    #menu {
 
-    li {
+        >li {
 
-      a {
+            >a {
 
-      }
+            }
+
+        }
 
     }
-
-  }
 
 }
 
 #home {
 
-  .rensponsive960 {
+    .rensponsive960 {
 
-    .box {
+        .box {
 
-      .title {
+            .title {
 
-      }
+            }
 
-      .body {
+            .body {
 
-      }
+            }
+
+        }
 
     }
-
-  }
 
 }
 ```
 
-* Extreme: ``` div>(header[title="Hello world!"]>ul#menu>li.menuItem$@-*5>a)+footer{bla bla bla}^script ``` 
+* Extreme: ``` #first>(header[title="Hello world!"]>ul#menu>li.menuItem$@-*5>a)+footer{bla bla bla}^script ``` 
 
 
 ```sass
-div {
+#first {
 
     header {
 
@@ -158,7 +163,7 @@ div {
 
             .menuItem {
 
-                a {
+                >a {
 
                 }
 
